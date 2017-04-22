@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="异常大体分为编译异常和运行异常两类，如果用软件开发（如Eclipse）编译异常在写代码时得到提醒，而运行异常需要在运行时才能得到提示。下面介绍几种常见的异常类型，便于在出错时对程序进行查错： （1）Exception 各种异常的根类    如果你不知道将发生的异常集体属于哪，而可以肯定种这个地方会出现异常时，可以把异常类型定义为Exception。 （2）ArithmeticException 算">
+<meta name="description" content="异常大体分为编译异常和运行异常两类，如果用软件开发（如Eclipse）编译异常在写代码时得到提醒，而运行异常需要在运行时才能得到提示。下面介绍几种常见的异常类型，便于在出错时对程序进行查错：">
 <meta name="keywords" content="Java,Exception,异常">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java中常见的异常类型">
 <meta property="og:url" content="http://yoursite.com/2017/04/15/Java中常见的异常类型/index.html">
 <meta property="og:site_name" content="Love Life,Love Java">
-<meta property="og:description" content="异常大体分为编译异常和运行异常两类，如果用软件开发（如Eclipse）编译异常在写代码时得到提醒，而运行异常需要在运行时才能得到提示。下面介绍几种常见的异常类型，便于在出错时对程序进行查错： （1）Exception 各种异常的根类    如果你不知道将发生的异常集体属于哪，而可以肯定种这个地方会出现异常时，可以把异常类型定义为Exception。 （2）ArithmeticException 算">
-<meta property="og:updated_time" content="2017-04-15T07:34:00.587Z">
+<meta property="og:description" content="异常大体分为编译异常和运行异常两类，如果用软件开发（如Eclipse）编译异常在写代码时得到提醒，而运行异常需要在运行时才能得到提示。下面介绍几种常见的异常类型，便于在出错时对程序进行查错：">
+<meta property="og:updated_time" content="2017-04-22T04:38:08.215Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中常见的异常类型">
-<meta name="twitter:description" content="异常大体分为编译异常和运行异常两类，如果用软件开发（如Eclipse）编译异常在写代码时得到提醒，而运行异常需要在运行时才能得到提示。下面介绍几种常见的异常类型，便于在出错时对程序进行查错： （1）Exception 各种异常的根类    如果你不知道将发生的异常集体属于哪，而可以肯定种这个地方会出现异常时，可以把异常类型定义为Exception。 （2）ArithmeticException 算">
+<meta name="twitter:description" content="异常大体分为编译异常和运行异常两类，如果用软件开发（如Eclipse）编译异常在写代码时得到提醒，而运行异常需要在运行时才能得到提示。下面介绍几种常见的异常类型，便于在出错时对程序进行查错：">
 
 
 
@@ -383,6 +383,7 @@
 
       
         <p>异常大体分为编译异常和运行异常两类，如果用软件开发（如Eclipse）编译异常在写代码时得到提醒，而运行异常需要在运行时才能得到提示。<br>下面介绍几种常见的异常类型，便于在出错时对程序进行查错：</p>
+<a id="more"></a>
 <p>（1）Exception 各种异常的根类</p>
 <p>   如果你不知道将发生的异常集体属于哪，而可以肯定种这个地方会出现异常时，可以把异常类型定义为Exception。</p>
 <p>（2）ArithmeticException 算数运算错误异常</p>
@@ -405,10 +406,11 @@ int i=s.split(&quot;?&quot;).length;
 System.out.println(i);
  java.util.regex.PatternSyntaxException: Dangling meta character &apos;?&apos; near index 0
 </code></pre><p>问题出现在加号附近，查询相关的资料显示，+、*、|、\等符号在正则表达示中有相应的不同意义。<br>一般来讲只需要加[]、或是\即可<br>改成int i=s.split(“[?]”).length;<br>或者int i=s.split(“\?”).length;</p>
-<p>（10）ClassCastException 类转换异常 多出现在多态向下转型中</p>
+<p>（10）ClassCastException 类转换异常，多出现在多态向下转型中</p>
 <pre><code>Animal a = new Dog();
 Cat c = (cat)a;
-</code></pre><p>向下转型时，强制把Dog类对象赋给Cat类会出现此异常。</p>
+</code></pre><p>向下转型时，强制把Dog类对象赋给Cat类会出现此异常。<br>进行强转前可以先使用 <strong>instanceof</strong> 关键字进行判断，判断a是不是Dog对象，结果是boolean类型<br>  格式：对象名 instanceof 类名</p>
+<p>（11）CloneNotSupportedException </p>
 
       
     </div>
@@ -454,6 +456,10 @@ Cat c = (cat)a;
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/19/继承中的两个面试题/" rel="next" title="继承中的两个面试题">
+                <i class="fa fa-chevron-left"></i> 继承中的两个面试题
+              </a>
             
           </div>
 
@@ -526,7 +532,7 @@ Cat c = (cat)a;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -548,7 +554,7 @@ Cat c = (cat)a;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
