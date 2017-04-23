@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java,面试题,继承," />
+  <meta name="keywords" content="Java,继承,多态,内部类,String,面试题," />
 
 
 
@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="1.看程序写结果：class Fu {     static {         System.out.println(&amp;quot;静态代码块Fu&amp;quot;);     }      {         System.out.println(&amp;quot;构造代码块Fu&amp;quot;);     }      public Fu() {         System.out.println(&amp;quo">
-<meta name="keywords" content="Java,面试题,继承">
+<meta name="description" content="继承1.看程序写结果：class Fu {     static {         System.out.println(&amp;quot;静态代码块Fu&amp;quot;);     }      {         System.out.println(&amp;quot;构造代码块Fu&amp;quot;);     }      public Fu() {         System.out.println(&amp;q">
+<meta name="keywords" content="Java,继承,多态,内部类,String,面试题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="继承中的两个面试题">
-<meta property="og:url" content="http://yoursite.com/2017/04/19/继承中的两个面试题/index.html">
+<meta property="og:title" content="经典面试题">
+<meta property="og:url" content="http://yoursite.com/2017/04/19/经典面试题/index.html">
 <meta property="og:site_name" content="Love Life,Love Java">
-<meta property="og:description" content="1.看程序写结果：class Fu {     static {         System.out.println(&amp;quot;静态代码块Fu&amp;quot;);     }      {         System.out.println(&amp;quot;构造代码块Fu&amp;quot;);     }      public Fu() {         System.out.println(&amp;quo">
-<meta property="og:updated_time" content="2017-04-19T14:54:13.001Z">
+<meta property="og:description" content="继承1.看程序写结果：class Fu {     static {         System.out.println(&amp;quot;静态代码块Fu&amp;quot;);     }      {         System.out.println(&amp;quot;构造代码块Fu&amp;quot;);     }      public Fu() {         System.out.println(&amp;q">
+<meta property="og:updated_time" content="2017-04-23T03:37:11.126Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="继承中的两个面试题">
-<meta name="twitter:description" content="1.看程序写结果：class Fu {     static {         System.out.println(&amp;quot;静态代码块Fu&amp;quot;);     }      {         System.out.println(&amp;quot;构造代码块Fu&amp;quot;);     }      public Fu() {         System.out.println(&amp;quo">
+<meta name="twitter:title" content="经典面试题">
+<meta name="twitter:description" content="继承1.看程序写结果：class Fu {     static {         System.out.println(&amp;quot;静态代码块Fu&amp;quot;);     }      {         System.out.println(&amp;quot;构造代码块Fu&amp;quot;);     }      public Fu() {         System.out.println(&amp;q">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/19/继承中的两个面试题/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/19/经典面试题/"/>
 
 
 
 
 
-  <title> 继承中的两个面试题 | Love Life,Love Java </title>
+  <title> 经典面试题 | Love Life,Love Java </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -288,7 +288,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/19/继承中的两个面试题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/19/经典面试题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gao Yanqing">
@@ -309,7 +309,7 @@
             
             
               
-                继承中的两个面试题
+                经典面试题
               
             
           </h1>
@@ -382,7 +382,7 @@
       
 
       
-        <h1 id="1-看程序写结果："><a href="#1-看程序写结果：" class="headerlink" title="1.看程序写结果："></a>1.看程序写结果：</h1><pre><code>class Fu {
+        <h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><h3 id="1-看程序写结果："><a href="#1-看程序写结果：" class="headerlink" title="1.看程序写结果："></a>1.看程序写结果：</h3><pre><code>class Fu {
     static {
         System.out.println(&quot;静态代码块Fu&quot;);
     }
@@ -419,7 +419,7 @@ class ExtendsTest2 {
 <p>B:静态的内容是随着类的加载而加载<br>　　静态代码块的内容会优先执行</p>
 <p>C:子类初始化之前先会进行父类的初始化</p>
 <p>程序执行结果：<br>　　静态代码块Fu<br>　　静态代码块Zi<br>　　构造代码块Fu<br>　　构造方法Fu<br>　　构造代码块Zi<br>　　构造方法Zi</p>
-<h1 id="2看程序写结果："><a href="#2看程序写结果：" class="headerlink" title="2看程序写结果："></a>2看程序写结果：</h1><pre><code>class X {
+<h3 id="2看程序写结果："><a href="#2看程序写结果：" class="headerlink" title="2看程序写结果："></a>2看程序写结果：</h3><pre><code>class X {
     Y b = new Y();
     X() {
         System.out.print(&quot;X&quot;);
@@ -447,7 +447,47 @@ public class Z extends X {
 <p>C:子父类的初始化(分层初始化)<br>    先进行父类初始化，然后进行子类初始化。</p>
 <p>程序执行结果：<br>    YXYZ</p>
 <p>★注意：<br>    虽然子类中构造方法默认有一个super()<br>    初始化的时候，不是按照那个顺序进行的。<br>    而是按照分层初始化进行的。<br>    它仅仅表示要先初始化父类数据，再初始化子类数据。</p>
+<hr>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h3 id="1-看程序写结果"><a href="#1-看程序写结果" class="headerlink" title="1.看程序写结果"></a>1.看程序写结果</h3><pre><code>public class StringDemo4 {
+    public static void main(String[] args) {
+        String s1 = &quot;hello&quot;;
+        String s2 = &quot;world&quot;;
+        String s3 = &quot;helloworld&quot;;
+        System.out.println(s3 == s1 + s2);
+        System.out.println(s3.equals((s1 + s2))); 
 
+        System.out.println(s3 == &quot;hello&quot; + &quot;world&quot;);
+        System.out.println(s3.equals(&quot;hello&quot; + &quot;world&quot;));
+</code></pre><ul>
+<li><p>程序执行结果：<br>  false<br>  true<br>  true<br>  true</p>
+</li>
+<li><p>原因：<br>字符串如果是变量相加，先开空间，在拼接。<br>字符串如果是常量相加，是先加，然后在常量池找，如果有就直接返回，否则，就创建</p>
+</li>
+</ul>
+<hr>
+<h2 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h2><h3 id="1-按照要求，补齐代码"><a href="#1-按照要求，补齐代码" class="headerlink" title="1.按照要求，补齐代码"></a>1.按照要求，补齐代码</h3><p>要求在控制台输出”HelloWorld”</p>
+<pre><code>interface Inter { 
+    void show(); 
+    //public abstract
+}
+
+class Outer { 
+    //（在这里补齐代码）
+}
+
+class OuterDemo {
+    public static void main(String[] args) {
+        Outer.method().show();
+</code></pre><p>答案：  </p>
+<pre><code>public static Inter method() {
+    //子类对象 -- 子类匿名对象
+    return new Inter() {
+        public void show() {
+            System.out.println(&quot;HelloWorld&quot;);
+        }
+    };
+}
+</code></pre>
       
     </div>
 
@@ -478,9 +518,15 @@ public class Z extends X {
           
             <a href="/tags/Java/" rel="tag"># Java</a>
           
-            <a href="/tags/面试题/" rel="tag"># 面试题</a>
-          
             <a href="/tags/继承/" rel="tag"># 继承</a>
+          
+            <a href="/tags/多态/" rel="tag"># 多态</a>
+          
+            <a href="/tags/内部类/" rel="tag"># 内部类</a>
+          
+            <a href="/tags/String/" rel="tag"># String</a>
+          
+            <a href="/tags/面试题/" rel="tag"># 面试题</a>
           
         </div>
       
@@ -492,10 +538,6 @@ public class Z extends X {
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/04/22/String二三面试题/" rel="next" title="String二三面试题">
-                <i class="fa fa-chevron-left"></i> String二三面试题
-              </a>
             
           </div>
 
@@ -577,7 +619,7 @@ public class Z extends X {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -599,7 +641,7 @@ public class Z extends X {
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -654,7 +696,7 @@ public class Z extends X {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-看程序写结果："><span class="nav-number">1.</span> <span class="nav-text">1.看程序写结果：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2看程序写结果："><span class="nav-number">2.</span> <span class="nav-text">2看程序写结果：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-number">1.</span> <span class="nav-text">继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-看程序写结果："><span class="nav-number">1.1.</span> <span class="nav-text">1.看程序写结果：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2看程序写结果："><span class="nav-number">1.2.</span> <span class="nav-text">2看程序写结果：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">2.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-看程序写结果"><span class="nav-number">2.1.</span> <span class="nav-text">1.看程序写结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匿名内部类"><span class="nav-number">3.</span> <span class="nav-text">匿名内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-按照要求，补齐代码"><span class="nav-number">3.1.</span> <span class="nav-text">1.按照要求，补齐代码</span></a></li></ol></li></ol></div>
             
 
           </div>
