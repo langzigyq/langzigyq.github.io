@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/19/经典面试题/index.html">
 <meta property="og:site_name" content="Love Life,Love Java">
 <meta property="og:description" content="继承1.看程序写结果：class Fu {     static {         System.out.println(&amp;quot;静态代码块Fu&amp;quot;);     }      {         System.out.println(&amp;quot;构造代码块Fu&amp;quot;);     }      public Fu() {         System.out.println(&amp;q">
-<meta property="og:updated_time" content="2017-04-23T03:37:11.126Z">
+<meta property="og:updated_time" content="2017-05-17T00:17:30.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="经典面试题">
 <meta name="twitter:description" content="继承1.看程序写结果：class Fu {     static {         System.out.println(&amp;quot;静态代码块Fu&amp;quot;);     }      {         System.out.println(&amp;quot;构造代码块Fu&amp;quot;);     }      public Fu() {         System.out.println(&amp;q">
@@ -464,6 +464,35 @@ public class Z extends X {
 <li><p>原因：<br>字符串如果是变量相加，先开空间，在拼接。<br>字符串如果是常量相加，是先加，然后在常量池找，如果有就直接返回，否则，就创建</p>
 </li>
 </ul>
+<h3 id="2-看程序写结果"><a href="#2-看程序写结果" class="headerlink" title="2.看程序写结果"></a>2.看程序写结果</h3><pre><code>public class StringBufferDemo {
+    public static void main(String[] args) {
+        String s1 = &quot;hello&quot;;
+        String s2 = &quot;world&quot;;
+        System.out.println(s1 + &quot;---&quot; + s2);// hello---world
+        change(s1, s2);
+        System.out.println(s1 + &quot;---&quot; + s2);// hello---world
+
+        StringBuffer sb1 = new StringBuffer(&quot;hello&quot;);
+        StringBuffer sb2 = new StringBuffer(&quot;world&quot;);
+        System.out.println(sb1 + &quot;---&quot; + sb2);// hello---world
+        change(sb1, sb2);
+        System.out.println(sb1 + &quot;---&quot; + sb2);// hello---worldworld
+
+    }
+
+    public static void change(StringBuffer sb1, StringBuffer sb2) {
+        sb1 = sb2;
+        sb2.append(sb1);
+    }
+
+    public static void change(String s1, String s2) {
+        s1 = s2;
+        s2 = s1 + s2;
+    }
+}
+</code></pre><ul>
+<li>原因：<br>字符串是常量值，String作为参数传递，效果和基本类型作为参数传递是一样的。<br>StringBuffer调用方法会改变值，使用 “=” 效果同String  </li>
+</ul>
 <hr>
 <h2 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h2><h3 id="1-按照要求，补齐代码"><a href="#1-按照要求，补齐代码" class="headerlink" title="1.按照要求，补齐代码"></a>1.按照要求，补齐代码</h3><p>要求在控制台输出”HelloWorld”</p>
 <pre><code>interface Inter { 
@@ -486,6 +515,309 @@ class OuterDemo {
             System.out.println(&quot;HelloWorld&quot;);
         }
     };
+}  
+</code></pre><hr>
+<h2 id="try…catch"><a href="#try…catch" class="headerlink" title="try…catch"></a>try…catch</h2><h3 id="1-看程序写结果-1"><a href="#1-看程序写结果-1" class="headerlink" title="1.看程序写结果"></a>1.看程序写结果</h3><pre><code>package main;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class TestTryCatchFinally {
+
+    /**
+     * finally 中的代码 在try 或者 catch 语句中的 return 之情会被调用
+     * 
+     */
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+
+        System.out.println(&quot;testFinally1()最终返回值a=&quot; + testFinally1());
+
+        System.out.println(&quot;testFinally11()最终返回值a=&quot; + testFinally11());
+
+        System.out.println(&quot;testFinally12()最终返回值a=&quot; + testFinally12());
+
+        System.out.println(&quot;testFinally21()最终返回值a=&quot; + testFinally21());
+
+        System.out.println(&quot;testFinally22()最终返回值a=&quot; + testFinally22());
+
+        System.out.println(&quot;testFinally3()最终返回值a=&quot; + testFinally3());
+
+    }
+
+    /*
+没有遇到异常时候的结果
+try-begin
+10--in try
+try--end
+finally-begin
+30--in finally
+finally-end
+10
+     */
+    public static int testFinally1(){
+
+        int a = 0;
+
+        try {
+
+            System.out.println(&quot;try-begin&quot;);
+            a=10;
+            //某一段业务逻辑，涉及到网络I/O
+//            throw new IOException(); 
+            System.out.println(a+&quot;--in try&quot;);
+            System.out.println(&quot;try--end&quot;);
+
+            return a;
+
+        }catch (Exception e) {
+
+            System.out.println(&quot;catch-begin&quot;);
+            a = 20;
+            System.out.println(a+&quot;--in catch&quot;);
+            System.out.println(&quot;catch-begin&quot;);
+
+//            return a;
+        }finally{
+
+            System.out.println(&quot;finally-begin&quot;);
+            a = 30;
+            System.out.println(a+&quot;--in finally&quot;);
+            System.out.println(&quot;finally-end&quot;);
+        }
+        return a;
+    }
+    /*
+没有遇到异常时候的结果 如果把return 放到了finally中那么无论有没有异常 返回值的都是 finally中的值
+try-begin
+10--in try
+try--end
+finally-begin
+30--in finally
+finally-end
+30
+     */
+    @SuppressWarnings(&quot;finally&quot;)
+    public static int testFinally11(){
+
+        int a = 0;
+
+        try {
+
+            System.out.println(&quot;try-begin&quot;);
+            a=10;
+            //某一段业务逻辑，涉及到网络I/O
+//            throw new IOException(); 
+            System.out.println(a+&quot;--in try&quot;);
+            System.out.println(&quot;try--end&quot;);
+
+            return a;
+
+        }catch (Exception e) {
+
+            System.out.println(&quot;catch-begin&quot;);
+            a = 20;
+            System.out.println(a+&quot;--in catch&quot;);
+            System.out.println(&quot;catch-begin&quot;);
+
+            return a;
+        }finally{
+
+            System.out.println(&quot;finally-begin&quot;);
+            a = 30;
+            System.out.println(a+&quot;--in finally&quot;);
+            System.out.println(&quot;finally-end&quot;);
+            return a;
+        }
+
+    }
+    /*
+没有遇到异常时候的结果
+try-begin
+10--in try
+try--end
+finally-begin
+30--in finally
+finally-end
+30
+     */
+    public static int testFinally12(){
+
+        int a = 0;
+
+        try {
+
+            System.out.println(&quot;try-begin&quot;);
+            a=10;
+            //某一段业务逻辑，涉及到网络I/O
+//            throw new IOException(); 
+            System.out.println(a+&quot;--in try&quot;);
+            System.out.println(&quot;try--end&quot;);
+
+//            return a;
+
+        }catch (Exception e) {
+
+            System.out.println(&quot;catch-begin&quot;);
+            a = 20;
+            System.out.println(a+&quot;--in catch&quot;);
+            System.out.println(&quot;catch-begin&quot;);
+
+//            return a;
+        }finally{
+
+            System.out.println(&quot;finally-begin&quot;);
+            a = 30;
+            System.out.println(a+&quot;--in finally&quot;);
+            System.out.println(&quot;finally-end&quot;);
+        }
+
+        return a;
+    }
+
+    /*
+遇到IOException异常时候的结果 将最下面的 return a 注释掉时
+try-begin
+catch-begin
+20--in catch
+catch-begin
+finally-begin
+30--in finally
+finally-end
+20
+     */
+    public static int testFinally21(){
+
+        int a = 0;
+
+        try {
+
+            System.out.println(&quot;try-begin&quot;);
+            a=10;
+            //某一段业务逻辑，涉及到网络I/O
+            throw new IOException(&quot;IO异常&quot;);
+//            System.out.println(a+&quot;--in try&quot;);
+//            System.out.println(&quot;try--end&quot;);
+
+//            return a;
+
+        }catch (IOException e) {
+
+            System.out.println(&quot;catch-begin&quot;);
+            a = 20;
+            System.out.println(a+&quot;--in catch&quot;);
+            System.out.println(&quot;catch-begin&quot;);
+
+            return a;
+        }finally{
+
+            System.out.println(&quot;finally-begin&quot;);
+            a = 30;
+            System.out.println(a+&quot;--in finally&quot;);
+            System.out.println(&quot;finally-end&quot;);
+        }
+
+//        return a;
+    }
+    /*   重要级别！
+遇到IOException异常时候的结果  未将最下面的 return a 注释掉，二将catch中的 return注释掉时
+try-begin
+catch-begin
+20--in catch
+catch-begin
+finally-begin
+30--in finally
+finally-end
+30
+     */
+    public static int testFinally22(){
+
+        int a = 0;
+
+        try {
+
+            System.out.println(&quot;try-begin&quot;);
+            a=10;
+            //某一段业务逻辑，涉及到网络I/O
+            throw new IOException(&quot;IO异常&quot;);
+//            System.out.println(a+&quot;--in try&quot;);
+//            System.out.println(&quot;try--end&quot;);
+
+//            return a;
+
+        }catch (IOException e) {
+
+            System.out.println(&quot;catch-begin&quot;);
+            a = 20;
+            System.out.println(a+&quot;--in catch&quot;);
+            System.out.println(&quot;catch-begin&quot;);
+
+//            return a;
+        }finally{
+
+            System.out.println(&quot;finally-begin&quot;);
+            a = 30;
+            System.out.println(a+&quot;--in finally&quot;);
+            System.out.println(&quot;finally-end&quot;);
+        }
+
+        return a;
+    }
+
+    /* 遇到其他Exception异常 但IOException却不能Catch到的时候
+try-begin
+finally-begin
+30--in finally
+finally-end
+Exception in thread &quot;main&quot; java.lang.ArithmeticException: / by zero
+    at main.TestTryCatchFinally.testFinally3(TestTryCatchFinally.java:168)
+    at main.TestTryCatchFinally.main(TestTryCatchFinally.java:22)
+
+将try return打开，将catch return 注释 时
+Exception in thread &quot;main&quot; java.lang.ArithmeticException: / by zero
+    at main.TestTryCatchFinally.testFinally3(TestTryCatchFinally.java:178)
+    at main.TestTryCatchFinally.main(TestTryCatchFinally.java:22)
+try-begin
+finally-begin
+30--in finally
+finally-end
+     */
+    public static int testFinally3(){
+
+        int a = 0;
+
+        try {
+
+            System.out.println(&quot;try-begin&quot;);
+            a=10;
+            //某一段业务逻辑，涉及到网络I/O
+            int b = a/0;
+            FileInputStream is = new FileInputStream(new File(&quot;D://mi.txt&quot;));
+            System.out.println(a+&quot;--in try&quot;);
+            System.out.println(&quot;try--end&quot;);
+
+    //            return a;
+
+        }catch (IOException e) {
+
+            System.out.println(&quot;catch-begin&quot;);
+            a = 20;
+            System.out.println(a+&quot;--in catch&quot;);
+            System.out.println(&quot;catch-begin&quot;);
+
+            return a;
+        }finally{
+
+            System.out.println(&quot;finally-begin&quot;);
+            a = 30;
+            System.out.println(a+&quot;--in finally&quot;);
+            System.out.println(&quot;finally-end&quot;);
+        }
+
+        return a;
+    }
+
 }
 </code></pre>
       
@@ -538,6 +870,10 @@ class OuterDemo {
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/08/JavaSE知识图谱/" rel="next" title="Java集合框架和IO流知识图谱">
+                <i class="fa fa-chevron-left"></i> Java集合框架和IO流知识图谱
+              </a>
             
           </div>
 
@@ -619,7 +955,7 @@ class OuterDemo {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -696,7 +1032,7 @@ class OuterDemo {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-number">1.</span> <span class="nav-text">继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-看程序写结果："><span class="nav-number">1.1.</span> <span class="nav-text">1.看程序写结果：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2看程序写结果："><span class="nav-number">1.2.</span> <span class="nav-text">2看程序写结果：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">2.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-看程序写结果"><span class="nav-number">2.1.</span> <span class="nav-text">1.看程序写结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匿名内部类"><span class="nav-number">3.</span> <span class="nav-text">匿名内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-按照要求，补齐代码"><span class="nav-number">3.1.</span> <span class="nav-text">1.按照要求，补齐代码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-number">1.</span> <span class="nav-text">继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-看程序写结果："><span class="nav-number">1.1.</span> <span class="nav-text">1.看程序写结果：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2看程序写结果："><span class="nav-number">1.2.</span> <span class="nav-text">2看程序写结果：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">2.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-看程序写结果"><span class="nav-number">2.1.</span> <span class="nav-text">1.看程序写结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-看程序写结果"><span class="nav-number">2.2.</span> <span class="nav-text">2.看程序写结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匿名内部类"><span class="nav-number">3.</span> <span class="nav-text">匿名内部类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-按照要求，补齐代码"><span class="nav-number">3.1.</span> <span class="nav-text">1.按照要求，补齐代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#try…catch"><span class="nav-number">4.</span> <span class="nav-text">try…catch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-看程序写结果-1"><span class="nav-number">4.1.</span> <span class="nav-text">1.看程序写结果</span></a></li></ol></li></ol></div>
             
 
           </div>
